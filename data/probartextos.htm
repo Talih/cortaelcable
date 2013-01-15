@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Probar textos</title>
+<script src="introniveles.js"></script>
+<script src="preguntas.js"></script>
+<script src="opciones.js"></script>
+<script src="soluciones.js"></script>
+<script src="respuestas.js"></script>
+<script>
+	var nivel;
+	var pregunta;
+	function pruebanivel(nv)
+	{
+		if(nv>11)
+		{
+			alert("no lo tenemos"); return false;
+		}
+		else
+		{
+			var cad,nivel;
+			nivel = --nv;
+			alert(intronivel[nivel]);
+			for (var i=0; i<5; ++i)
+				{
+					cad = parseInt(i+1,10) + " " + pregunta[nivel][i] + "\n";
+					cad += "   A- " + opcion[nivel][i][0] + "\n"; 
+					cad += "   B- " + opcion[nivel][i][1] + "\n";
+					if (solucion[nivel][i]==0)
+						cad +="    Solución : A";
+					else
+						cad +="    Solución : B";
+					alert(cad);
+				}
+			alert("fin");
+		}
+	}
+</script>
+</head>
+<body>
+<h3>Probar</h3>
+<a href="javascript:void(0)" onclick="pruebanivel(1);">probar nivel 1</a><br />
+<a href="javascript:void(0)" onclick="pruebanivel(2);">probar nivel 2</a><br />
+<a href="javascript:void(0)" onclick="pruebanivel(3);">probar nivel 3</a><br />
+<a href="javascript:void(0)" onclick="pruebanivel(4);">probar nivel 4</a><br />
+<a href="javascript:void(0)" onclick="pruebanivel(5);">probar nivel 5</a><br />
+<a href="javascript:void(0)" onclick="pruebanivel(6);">probar nivel 6</a><br />
+<a href="javascript:void(0)" onclick="pruebanivel(7);">probar nivel 7</a><br />
+<a href="javascript:void(0)" onclick="pruebanivel(8);">probar nivel 8</a><br />
+<a href="javascript:void(0)" onclick="pruebanivel(9);">probar nivel 9</a><br />
+<a href="javascript:void(0)" onclick="pruebanivel(10);">probar nivel 10</a><br />
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Corta el cable</title>
+<link href='http://fonts.googleapis.com/css?family=Economica' rel='stylesheet' type='text/css'>
+<link href="estilos/reset.css" rel="stylesheet" type="text/css" />
+<style>
+	body { font-size:125%; font-family:Economica;}
+	#contenedor{ font-size:.5em; width:102.4em; margin:auto; overflow:hidden;}
+	#cargando {width:102.4em;text-align:center; overflow:hidden; position:absolute; z-index:2; display:block;top:0;}
+	#wrapimagen {width:102.4em;position:absolute; z-index:3;display:block;top:0;display:block;}
+	#contenido{width:102.4em;position:absolute; z-index:5;display:block;top:0;display:none}
+	#depura{ height:10em; width:90em;position:absolute; z-index:10;display:block;top:0;display:block}
+</style>
+<script>
+function carga()
+{
+	var contenido,lw,lh,fs,nh;
+	lw = window.innerWidth;
+/*	lh = screen.availHeight; */
+	lh = window.innerHeight;
+//	alert(lw + ' ' + lh);
+	if(lw >= 1024)
+		{
+			//alert("Ancho maximo");
+			ll = parseInt((lw-1024)/2,10);
+			lt = parseInt((lh-530)/2,10);
+			document.getElementById("contenido").style.left = ll + "px";
+			document.getElementById("contenido").style.top = lt + "px";
+		}
+	else
+		{
+			fs = lw/1024;
+			nh = 530 * fs;
+			//alert(nh);
+			if(nh<530)
+				{
+					lt = parseInt((lh-nh)/2,10);
+					document.getElementById("contenido").style.top = lt + "px";
+				}
+			document.getElementById("contenido").style.fontSize = fs + "em";
+		}
+	document.getElementById("cuerpo").style.backgroundColor = "#333";
+	contenido = document.getElementById("contenido");
+	contenido.style.display="block";
+	document.getElementById("cargando").style.display="none";
+	//depura();
+}
+
+function quitanombre()
+{
+	if (document.getElementById("nombre").value=="(Pon aquí tu nombre)")
+		document.getElementById("nombre").value="";
+}
+function validatexto()
+{
+	if (document.getElementById("nombre").value=="")
+		document.getElementById("nombre").value="(Pon aquí tu nombre)";
+}
+
+function tratanombre()
+{
+	var txtdefecto = "(Pon aquí tu nombre)";
+	var txt;
+	txt = document.getElementById("nombre").value;
+	//if (txt == txtdefecto)
+}
+function compruebanombre()
+	{
+		var txtdefecto = "(Pon aquí tu nombre)";
+		var txt;
+		txt = document.getElementById("nombre").value;
+		if(txt == txtdefecto)
+			{
+				alert("No has escrito tu nombre");
+				return false;
+			}
+		else
+			{
+				document.cookie="nombre=" + txt;
+				document.location.href = "corta-el-cable2.htm";
+			}
+	}
+function overin()
+{
+	document.getElementById("imgbtnjugar").src = "imagenes2/jugarinicioover.png"; 
+}
+function overout()
+{
+	document.getElementById("imgbtnjugar").src = "imagenes2/jugarinicio.png";
+}
+
+</script>
+</head>
+<body id="cuerpo">
+<div id="contenedor">
+    	<div id="cargando">
+        	<img src="imagenes/ajax_loader_red_300.gif" style="margin:5em 0 0 0"/><br /><br />
+			<span style=" font-family:Economica; font-size:5em; font-weight:bold; color:#e2001a">Cargando</span>
+        </div><!-- fin cargando -->
+    	<div id="contenido">
+        <div id="wrapimagen"><img src="fondos2/fondointro1024.jpg" id="imgfondo" style="width:102.4em; height:53em" /></div>
+        <div id="wrapintroduccion" style="position:absolute;z-index:4; left:55.1em; top:1.7em">
+        	<img src="fondos2/cajainicio.png" style="width:43.8em; height:41.4em" />
+            <div id="introduccion" style="width:33.5em; position:absolute;top:10em; left:5em; z-index:6;">
+            <span style="font-size:2em; font-family:Economica"><br />Kid Fulano, se ha visto envuelto en medio de una trama de maldad malísima y ahora tiene que salvar el mundo, pero para eso necesita tu ayuda.<br /><br />
+Las malvadas fuerzas del mal han sembrado el planeta de peligros y tienes que ayudarle a encontrarlos. ¡Cuidado! las preguntas están llenas de trampas.
+<br /><br />Puede contar contigo
+<input name="nombre" type="text" id="nombre" style="font-size:1em;font-family:Economica;border:1px solid #eaeaeb; background-color:#eaeaeb; padding:.2em" onclick="quitanombre();" onblur="validatexto();"value="(Pon aquí tu nombre)" size="20" maxlength="20"  /></span>
+</div>
+<div id="btnjugar" style="position:absolute;top:37em; left:23em;z-index:7"><a href="javascript:void(0)" onclick="compruebanombre();" onmouseover="overin();" onmouseout="overout();"><img src="imagenes2/jugarinicio.png" id="imgbtnjugar" style=" width:17.2em; height:6.6em" /></a></div>
+        </div><!-- frin wrap intro -->
+<!--       	<div id="introduccion" style="float:left;margin:20em 0 0 55em; width:33.5em; position:absolute; z-index:6; background-color:blue">
+            <span style="font-size:2em; font-family:Economica"><br />Kid Fulano, se ha visto envuelto en medio de una trama de maldad malísima y ahora tiene que salvar el mundo, pero para eso necesita tu ayuda.<br /><br />
+Las malvadas fuerzas del mal han sembrado el planeta de peligros y tienes que ayudarle a encontrarlos. ¡Cuidado! las preguntas están llenas de trampas.
+<br /><br />Puede contar contigo
+<input name="nombre" type="text" id="nombre" style="font-size:1em;font-family:Economica;border:1px solid #eaeaeb; background-color:#eaeaeb" onclick="quitanombre();" onblur="validatexto();"value="(Pon aquí tu nombre)" size="20" maxlength="20"  /></span>
+</div>
+<div id="btnjugar" style="float:left; margin:6em 0 0 70em; position:absolute; z-index:7"><a href="javascript:void(0)" onclick="compruebanombre();"><img src="imagenes/jugar1024.png" /></a></div>-->
+        </div>
+    </div>
+<script>
+	carga();
+</script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+/*////// General //////*/
+
+
+
+
+/*////// Inicio & Finales //////*/
+
+.texto {
+	font-family: 'Economica', sans-serif;
+	font-weight:400;
+	font-size:24pt;
+	color:#3E3D40;
+}
+
+.nombre {
+	font-family: 'Economica', sans-serif;
+	font-weight: 700;
+	font-size: 24pt;
+	color: #3E3D40;
+}
+
+.denominacionPuntos {
+	font-family: 'Economica', sans-serif;
+	font-weight: 700;
+	font-size: 24pt;
+	color: #E2001A;
+}
+
+
+/*////// Niveles //////*/
+
+.txtPresentacion {
+	font-family: 'Economica', sans-serif;
+	font-weight: 400;
+	font-size:24pt;
+	color: #3E3D40;
+	background-color: #fff; 
+	width: 350px;
+	height: auto;
+	padding: 15px;
+	position: absolute;
+	top: 100px;
+	right: 100px;
+/*	box-shadow: #cccccc;
+	-moz-box-shadow: 4px #ccc;
+	-webkit-box-shadow: 4px #ccc;
+*/
+/*
+-moz-box-shadow: 0 0 5px #888;
+-webkit-box-shadow: 0 0 5px#888;
+*/
+box-shadow: 0 0 5px 5px #888;
+}
+
+
+.numPregunta {
+	font-family: 'Economica', sans-serif;
+	font-weight: 700;
+	font-size: 108pt;
+	color: #fff;
+}
+
+.txtPregunta {
+	font-family: 'Economica', sans-serif;
+	font-weight: 400;
+	font-size: 24pt;
+	color: #fff;
+	background-color: #3E3D40;
+	width: 700px;
+	height: auto;
+	padding: 15px;
+	position: absolute;
+	top: 100px;
+	right: 100px;
+}
+
+.txtRespuesta {
+	font-family: 'Economica', sans-serif;
+	font-weight: 400;
+	font-size: 24pt;
+	color: #3E3D40;
+	background-color: #fff;
+	width: 560px;
+	height: auto;
+	padding: 5px 10px 5px 40px;
+	position: relative;
+	top: 40px;
+	right: 50px;
+}

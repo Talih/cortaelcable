@@ -1,0 +1,270 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Corta el cable</title>
+<link href='http://fonts.googleapis.com/css?family=Economica' rel='stylesheet' type='text/css'>
+<link href="estilos/reset.css" rel="stylesheet" type="text/css" />
+<style>
+	body { font-size:125%; font-family:Economica}
+	#contenedor{ font-size:.5em; width:102.4em; margin:auto; overflow:hidden;}
+	#cargando {height:76.8em; width:102.4em;text-align:center; overflow:hidden; position:absolute; z-index:2; display:block;top:0;}
+	#wrapimagen {width:102.4em;position:absolute; z-index:3;display:block;top:0;display:block;}
+	#contenido{width:102.4em;position:absolute; z-index:5;display:block;top:0;display:none}
+
+	#depura{ height:10em; width:90em;position:absolute; z-index:10;display:block;top:0;display:block}
+</style>
+<style>
+	.txtintornivel1024 { font-size:2em;}
+
+	/* preguntas */
+
+	.wrappregunta1024 {float:left; margin:9.3em 0 0 9.8em; width:73em;}
+	.txtnumpregunta1024 { font-size:7em; font-weight:bold}
+	.numpregunta1024 {float:left}
+	.preguntatxt1024 {float:left; padding:1em; color:#FFF; background-color:#666; margin-left:2em; margin-top:1em;width:60em; min-height:5em;}
+	.txtpreguntatxt1024 { font-size:2em;}
+	.opciona1024 {float:left;margin:1em 0 0 10em; padding:1em; background-color:#FFF; max-width:57em}
+	.opcionb1024 { clear:both;float:left;margin:.5em 0 0 10em; padding:1em;background-color:#FFF; max-width:57em}
+	.txtopciona1024,.txtopcionb1024 {font-size: 2.1em; display:inline-block; margin-left:.5em;cursor:pointer; max-width:23.6em}
+	.chk1024 {float:left; margin-top:-.2em;}
+
+	#cseguir { clear:both; }
+	#cseguir a {float:right; margin:.8em 15em 0 0; background-image:url(imagenes/seguir1024.png); background-repeat:no-repeat; width:16em; height:6em;display:inline-block}
+	#cseguir a:hover {background-image:url(imagenes/seguirover1024.png);}
+
+</style>
+<script src="data/introniveles.js"></script>
+<script src="data/preguntas.js"></script>
+<script src="data/opciones.js"></script>
+<script src="data/soluciones.js"></script>
+<script src="data/respuestas.js"></script>
+<script>
+var nivel = 0,npregunta=0,intro=1;tamano=0;nombre="";
+tamano = 1024;
+function carga()
+{
+	var contenido;
+	var srcimagen = "",srcimagentitulo = "";
+//gestion tamaños
+	var lw,lh,fs,nh;
+	lw = window.innerWidth;
+/*	lh = screen.availHeight; */
+	lh = window.innerHeight;
+//	alert(lw + ' ' + lh);
+	if(lw >= 1024)
+		{
+			//alert("Ancho maximo");
+			ll = parseInt((lw-1024)/2,10);
+			lt = parseInt((lh-530)/2,10);
+			document.getElementById("contenido").style.left = ll + "px";
+			document.getElementById("contenido").style.top = lt + "px";
+		}
+	else
+		{
+			fs = lw/1024;
+			nh = 530 * fs;
+			//alert(nh);
+			if(nh<530)
+				{
+					lt = parseInt((lh-nh)/2,10);
+					document.getElementById("contenido").style.top = lt + "px";
+				}
+			document.getElementById("contenido").style.fontSize = fs + "em";
+		}
+
+//
+	//alert("lop");
+	document.getElementById("cuerpo").style.backgroundColor = "#333";
+
+	if(intro==1)
+		{
+			// poner aqui que salga la capa con el encabezado de inicio o con la de preguntas
+			srcimagen = "fondos2/fondonivel" + (nivel+1) + ".jpg";
+			srcimagentitulo = "fondos2/titulointro" + (nivel+1) + ".png";
+			document.getElementById("txtintronivel").innerHTML = intronivel[nivel].replace('[TU NOMBRE]',nombre);
+			document.getElementById("wrapintro").style.display = "block";
+			document.getElementById("wrappregunta").style.display = "none";
+		}
+	if(intro==0)
+		{
+			//n pregunta
+			// poner aqui que salga la capa con el encabezado de inicio o con la de preguntas
+			srcimagen = "fondos2/fondonivel" + (nivel+1) + ".jpg";
+			srcimagentitulo = "fondos2/titulopregunta" + (nivel+1) + ".png";
+			document.getElementById("txtnumpregunta").innerHTML = (npregunta+1) + ".";
+			document.getElementById("txtpreguntatxt").innerHTML = pregunta[nivel][npregunta];
+			document.getElementById("txtopciona").innerHTML = opcion[nivel][npregunta][0];
+			document.getElementById("txtopcionb").innerHTML = opcion[nivel][npregunta][1];			
+			document.getElementById("wrapintro").style.display = "none";
+			document.getElementById("wrappregunta").style.display = "block";
+			document.getElementById("chkopciona").value = 0;
+			document.getElementById("chkopcionb").value = 0;
+			document.getElementById("chkopciona").src = "imagenes/checkoff1024.png";
+			document.getElementById("chkopcionb").src = "imagenes/checkoff1024.png";
+		}
+	contenido = document.getElementById("contenido");
+	//alert(srcimagen);
+	document.getElementById("imgfondo").src = srcimagen;
+	//esto hay que meterlo mejor;
+	document.getElementById("titulo").src = srcimagentitulo;
+	document.getElementById("titulop").src = srcimagentitulo;
+	contenido.style.display="block";
+	document.getElementById("cargando").style.display="none";
+	//depura();
+}
+function depura()
+{
+	document.getElementById("depura").innerHTML = "nivel = " + nivel + " pregunta = " + pregunta ;
+}
+function jugar()
+{
+	if(intro == 1)
+		{
+			intro = 0;
+			//alert(pregunta[nivel][npregunta]);
+		}
+	else
+		{
+			//alert(pregunta[nivel][npregunta]);
+		}
+	carga();
+}
+function cambiachk(opc)
+{
+//	alert(opc);
+	if (opc==0)
+		{
+			if(document.getElementById("chkopciona").value==1)
+				{
+					document.getElementById("chkopciona").value=0;
+					document.getElementById("chkopciona").src="imagenes/checkoff1024.png"; /* tamaaño aqui */
+				}
+			else
+				{
+					document.getElementById("chkopciona").value=1;
+					document.getElementById("chkopciona").src="imagenes/checkon1024.png"; /* tamaaño aqui */
+					document.getElementById("chkopcionb").value=0;
+					document.getElementById("chkopcionb").src="imagenes/checkoff1024.png"; /* tamaaño aqui */
+				}
+		}
+	else
+		{
+			if(document.getElementById("chkopcionb").value==1)
+				{
+					document.getElementById("chkopcionb").value=0;
+					document.getElementById("chkopcionb").src="imagenes/checkoff1024.png"; /* tamaaño aqui */
+				}
+			else
+				{
+					document.getElementById("chkopciona").value=0;
+					document.getElementById("chkopciona").src="imagenes/checkoff1024.png"; /* tamaaño aqui */
+					document.getElementById("chkopcionb").value=1;
+					document.getElementById("chkopcionb").src="imagenes/checkon1024.png"; /* tamaaño aqui */
+				}
+		}
+}
+function seguir()
+{
+	var opc=-1;
+	if (document.getElementById("chkopciona").value==1)
+		{ opc=0;}
+	if (document.getElementById("chkopcionb").value==1)
+		{ opc=1;}
+	respuesta[nivel][npregunta] = opc;
+	++npregunta;
+	if(!pregunta[nivel][npregunta])
+		{
+			//alert("Fin nivel");
+			npregunta = 0;
+			intro=1;
+			++nivel;
+			if(!pregunta[nivel])
+				{//alert("Final correguimos y resultado")
+					corrigue();
+				}
+		}
+	carga();
+}
+function getCookie(c_name)
+{
+var i,x,y,ARRcookies=document.cookie.split(";");
+for (i=0;i<ARRcookies.length;i++)
+{
+  x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
+  y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
+  x=x.replace(/^\s+|\s+$/g,"");
+  if (x==c_name)
+    {
+    return unescape(y);
+    }
+  }
+}
+function corrigue()
+{
+	var nn,np;
+	var naciertos=0,nfallos=0,nnoresponde=0;
+	nn = pregunta.length;
+	for(var i=0; i<nn; ++i)
+		{
+			np = pregunta[i].length;
+			for(var j=0; j<np ; ++j)
+				{
+					if(respuesta[i][j]==-1)
+						{ ++nnoresponde;}
+					else
+						{
+							if(respuesta[i][j]=solucion[i][j])
+								{++naciertos}
+							else
+								{++nfallos}
+						}
+				}
+		}
+		alert("Fin")
+//	alert("Aciertos " + naciertos + " Fallos " + nfallos + " No responde " + nnoresponde);
+}
+function overin()
+{
+	document.getElementById("imgbtnjugar").src = "imagenes2/jugarinicioover.png"; 
+}
+function overout()
+{
+	document.getElementById("imgbtnjugar").src = "imagenes2/jugarinicio.png";
+}
+
+</script>
+</head>
+<body id="cuerpo">
+<div id="contenedor">
+    	<div id="cargando">
+        	<img src="imagenes/ajax_loader_red_300.gif" style="margin:5em 0 0 0"/><br /><br />
+			<span style=" font-family:Economica; font-size:5em; font-weight:bold; color:#e2001a">Cargando</span>
+        </div><!-- fin cargando --> 
+  <div id="contenido">
+  <div id="wrapimagen"><img src="" id="imgfondo" style="width:102.4em; height:53em" /></div>
+            <div id="wrapintro" style="position:absolute;z-index:4; left:16.4em; top:4.6em">
+                <img src="" id="titulo" style="width:77.1em; height:4.7em"/>
+            <div id="cajaintronivel" style="padding:2.4em; width:33.6em; background-color:#FFF;border:1px solid black;position:relative;top:1.5em; left:15em"><span id="txtintronivel" class="txtintornivel1024"></span></div>
+<div id="btnjugar" style="position:relative; top:2.5em;left:28em; width:18em;"><a href="javascript:void(0)" onclick="jugar();" onmouseover="overin();" onmouseout="overout();"><img src="imagenes2/jugarinicio.png" id="imgbtnjugar" style=" width:17.2em; height:6.6em" /></a></div>
+              <!-- aqui dos veces tamaño-->
+            </div>
+            <div id="wrappregunta" style="position:absolute;z-index:4; left:16.4em; top:4.6em"><!-- aqui tamaño -->
+            <img src="" name="titulo" style="width:61.8em;height:3.8em; position: relative; z-index:5" id="titulop" />   
+            <div style="clear:both">
+                <div id="numpregunta" class="numpregunta1024"><span id="txtnumpregunta" class="txtnumpregunta1024"></span></div><!-- aqui dos veces tamaño-->
+                    <div id="preguntatxt" class="preguntatxt1024"><span id="txtpreguntatxt" class="txtpreguntatxt1024"></span></div><!-- aqui dos veces tamaño-->
+                    <div id="opciona" class="opciona1024"><input type="image" value="0" id="chkopciona" src="imagenes/checkoff1024.png" class="chk1024" onclick="cambiachk(0);"/><label for="chkopciona"><span id="txtopciona" class="txtopciona1024" ></span></label></div>
+                    <div id="opcionb" class="opcionb1024"><input type="image" value="0" id="chkopcionb" src="imagenes/checkoff1024.png" class="chk1024" onclick="cambiachk(1);" /><label for="chkopcionb"><span id="txtopcionb" class="txtopcionb1024" ></span></label></div>
+                    <div id="cseguir"><a href="javascript:void(0)" onclick="seguir();"></a></div>
+                </div>
+                </div>
+        </div><!-- fin contenido -->
+        <div id="depura"></div><!-- fin depura -->
+</div>
+<script>
+	nombre = getCookie('nombre');
+	carga();
+</script>
+</body>
+</html>
